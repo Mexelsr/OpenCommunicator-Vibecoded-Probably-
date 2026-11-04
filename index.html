@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Open Communicator</title>
+<link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="logo-mark">💬</span><span class="logo-text">open communicator</span></div>
+    <div class="header-right">
+      <button class="icon-btn header-btn" id="helpBtn" title="Keyboard shortcuts (?)" aria-label="Keyboard shortcuts">⌨️</button>
+      <button class="icon-btn header-btn" id="themeBtn" title="Theme" aria-label="Change theme">🌓</button>
+      <div class="user-box">
+        <span>Posting as <strong id="currentUser"></strong></span>
+        <button class="btn-link" id="changeUser">Switch</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="card composer">
+    <div class="composer-row">
+      <div id="composerAvatar"></div>
+      <textarea id="postInput" rows="1" placeholder="What's on your mind? Use #tags and @mentions" aria-label="Write a post"></textarea>
+    </div>
+    <div class="composer-actions">
+      <span class="char-count" id="charCount"></span>
+      <button class="btn-primary" id="postBtn" disabled>Post</button>
+    </div>
+  </section>
+
+  <section class="card toolbar" aria-label="Search and filter posts">
+    <div class="search">
+      <span class="search-icon" aria-hidden="true">🔍</span>
+      <input id="searchInput" type="search" placeholder="Search posts, people or #tags   ( / )" aria-label="Search posts" />
+    </div>
+    <div class="toolbar-row">
+      <div class="tabs" id="filterTabs" role="tablist">
+        <button class="tab active" data-filter="all" role="tab">All</button>
+        <button class="tab" data-filter="mine" role="tab">My posts</button>
+        <button class="tab" data-filter="saved" role="tab">🔖 Saved</button>
+      </div>
+      <select id="sortSelect" class="sort-select" aria-label="Sort posts">
+        <option value="newest">🕒 Newest</option>
+        <option value="top">🔥 Most reactions</option>
+        <option value="discussed">💬 Most discussed</option>
+      </select>
+    </div>
+  </section>
+
+  <div id="feedInfo" class="feed-info"></div>
+  <section id="feed"></section>
+</main>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<script src="main.js"></script>
+</body>
+</html>
