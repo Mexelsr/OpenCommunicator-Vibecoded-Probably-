@@ -59,6 +59,42 @@
 
 <div id="toasts" class="toasts" aria-live="polite"></div>
 
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    databaseURL: "https://opencommunicator-vibecoded-default-rtdb.asia-southeast1.firebasedatabase.app/"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  function savePost() {
+    const postText = document.getElementById('postInput').value;
+    if (postText.trim() === "") return;
+
+    db.ref('posts').push({
+      text: postText,
+      timestamp: Date.now()
+    });
+
+    document.getElementById('postInput').value = '';
+  }
+
+  db.ref('posts').on('value', (snapshot) => {
+    const postsList = document.getElementById('postsList');
+    postsList.innerHTML = '';
+
+    snapshot.forEach((childSnapshot) => {
+      const post = childSnapshot.val();
+      const li = document.createElement('li');
+      li.textContent = post.text;
+      postsList.appendChild(li);
+    });
+  });
+</script>
+
 <script src="main.js"></script>
 </body>
 </html>
